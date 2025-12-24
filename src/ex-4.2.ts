@@ -1,4 +1,4 @@
-function processData(data: unknown): string {
+function processData(data: any): string {
   return data.toUpperCase();
 }
 

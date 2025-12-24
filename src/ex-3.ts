@@ -94,6 +94,31 @@ const ordersSample = [
 ];
 
 //Start Coding Here
+//ให้ประกาศ type ชื่อ OrderStatus ซึ่งเป็น union type ของ string literals ค่าที่เป็นไปได้คือ
+type OrderStatus = "pending" | "shipped" | "delivered" | "cancelled";
+
+//ให้ประกาศ type ที่ชื่อ Order ซึ่งเป็น Object โดยมี Property ดังต่อไปนี้
+type Order = {
+  orderId: string;
+  status: OrderStatus;
+  productName: string;
+  price: number;
+  quantity: number;
+  discount?: number;
+};
+
+function  totalByStatusWithDiscount(orders:Order[] , targetStatus: OrderStatus): number {
+  return orders.reduce((acc,cur)=>{
+    if(cur.status === targetStatus){
+      const total = cur.price*cur.quantity
+      const discount = cur.discount || 0;
+      return acc + (total - discount)
+    }
+    return acc
+  },0)
+}
+
+const orders: Order[] = ordersSample as Order[];
 
 const totalShipped = totalByStatusWithDiscount(orders, "shipped");
 console.log("Total for shipped orders with discount:", totalShipped);
