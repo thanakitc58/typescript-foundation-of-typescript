@@ -110,7 +110,7 @@ function totalByStatusWithDiscount(
   targetStatus: OrderStatus
 ): number {
 
-  return order.reduce(
+  return orders.reduce(
     (acc, cur) =>
       cur.status === targetStatus
         ? acc + (cur.price * cur.quantity - (cur.discount ?? 0))
